@@ -10,4 +10,4 @@ $(OBJECT): $(SOURCE)
 	$(CC) $(SOURCE) -c
 
 clean:
-	rm $(OBJECT)
+	rm $(OBJECT) output
