@@ -1,3 +1,4 @@
+VERSION := 0.1
 SOURCE := main.c
 OBJECT := main.o
 CC := gcc
