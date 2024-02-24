@@ -7,7 +7,8 @@ typedef struct rectangle
     int y_position;
     int x_size;
     int y_size;
-    int speed;
+    int x_speed;
+    int y_speed;
     Color color;
 } rectangle;
 
@@ -23,13 +24,13 @@ typedef struct circle
 
 int main()
 {
-    const int screenWidth = 700;
-    const int screenHeight = 700;
+    const int screen_width = 700;
+    const int screen_height = 700;
     const char *title = "Roblox 2 - v0.2";
 
     rectangle rectangle;
-    rectangle.x_position = screenWidth / 2 - 100;
-    rectangle.y_position = screenHeight / 2 - 100;
+    rectangle.x_position = screen_width / 2 - 100;
+    rectangle.y_position = screen_height / 2 - 100;
     rectangle.x_size = 200;
     rectangle.y_size = 200;
     rectangle.color = BLUE;
@@ -42,7 +43,7 @@ int main()
     circle.y_speed = 10;
     circle.color = RED;
 
-    InitWindow(screenWidth, screenHeight, title);
+    InitWindow(screen_width, screen_height, title);
     SetTargetFPS(60);
 
     while(!WindowShouldClose())
@@ -55,15 +56,23 @@ int main()
         circle.x_position += circle.x_speed;
         circle.y_position += circle.y_speed;
 
-        if(circle.x_position == screenWidth - 50) circle.x_speed *= -1;
+        if(circle.x_position == screen_width - 50) circle.x_speed *= -1;
         if(circle.x_position == 50) circle.x_speed *= -1;
-        if(circle.y_position == screenHeight - 50) circle.y_speed *= -1;
+        if(circle.y_position == screen_height - 50) circle.y_speed *= -1;
         if(circle.y_position == 50) circle.y_speed *= -1;
+
+        if(rectangle.x_position > screen_width - rectangle.x_size) rectangle.x_position = screen_width - rectangle.x_size;
+        if(rectangle.x_position < 0) rectangle.x_position = 0;
+        if(rectangle.y_position > screen_height - rectangle.y_size) rectangle.y_position = screen_height - rectangle.y_size;
+        if(rectangle.y_position < 0) rectangle.y_position = 0;
 
         BeginDrawing();
 
-        DrawCircle(circle.x_position, circle.y_position, circle.radius, circle.color);
-        DrawRectangle(rectangle.x_position, rectangle.y_position, rectangle.x_size, rectangle.y_size, rectangle.color);
+        DrawCircle(circle.x_position, circle.y_position,
+                circle.radius, circle.color);
+
+        DrawRectangle(rectangle.x_position, rectangle.y_position,
+                rectangle.x_size, rectangle.y_size, rectangle.color);
 
         ClearBackground(BLACK);
         EndDrawing();
