@@ -1,7 +1,7 @@
 #ifndef SHAPE_H
 #define SHAPE_H
 
-#include </usr/local/include/raylib.h>
+#include <raylib.h>
 
 typedef struct rectangle
 {
